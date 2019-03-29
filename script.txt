@@ -1,0 +1,28 @@
+import com.eviware.soapui.impl.wsdl.teststeps.*
+import com.eviware.soapui.support.types.StringToStringMap
+import com.eviware.soapui.model.project.ProjectFactoryRegistry
+import com.eviware.soapui.impl.wsdl.WsdlProjectFactory
+import com.eviware.soapui.impl.wsdl.WsdlProject
+//get the Util project
+def project = null
+def workspace = testRunner.testCase.testSuite.project.getWorkspace();
+
+if (workspace != null) {
+project = workspace.getProjectByName("GSTR3B")
+log.info(project)
+}
+if (project.open && project.name == "GSTR3B") {
+def testSuite = project.getTestSuiteByName("GSTR3B Test Suite");
+def testCase = testSuite.getTestCaseByName("GSTR3B Negative cases")
+log.info(testCase)
+def size
+size = testRunner.testCase.testSuite.project.testSuites["GSTR3B Test Suite"].testCases["GSTR3B Negative cases"].getTestStepCount();
+log.info(size)
+
+log.info(testSuite)
+if(testSuite == null)
+{
+                throw new RuntimeException("Could not locate testsuite 'GSTR3B Test Suite'! ");
+}
+
+

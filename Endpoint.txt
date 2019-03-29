@@ -1,0 +1,24 @@
+def project = null
+def workspace = testRunner.testCase.testSuite.project.getWorkspace();
+
+                if (workspace != null)
+                {
+                                project = workspace.getProjectByName("GSTR3B")
+                                log.info(project)
+                }
+
+if (project.open && project.name == "GSTR3B")
+{
+                def testSuite1 = project.getTestSuiteByName("GSTR3B Test Suite");
+                log.info(testSuite1)
+                if(testSuite1 == null)
+                                {
+                throw new RuntimeException("Could not locate testsuite 'GSTR3B Test Suite'! ");
+                                }
+                else
+                                {
+                                                                def testcases = testRunner.testCase.testSuite.getTestCaseList()
+                                                                // for all testCases in your test suite...
+                        
+
+

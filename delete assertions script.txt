@@ -1,0 +1,20 @@
+def project = context.testCase.testSuite.project
+def testSuite = project.getTestSuiteByName("GSTR3B Test Suite")
+def testCase = testSuite.getTestCaseByName("GSTR3B Negative cases")
+def size
+size = testRunner.testCase.testSuite.project.testSuites["GSTR3B Test Suite"].testCases["GSTR3B Negative cases"].getTestStepCount();
+log.info("Size " +size)
+for(int i=4;i<size;i++)
+{
+def testStep = testCase.getTestStepAt(i)
+//log.info("Test Step" +testStep)
+//def testStep=testCase.getTestStepByName("Outward taxable supplies-camt")
+//testStep.removeAssertion( testStep.getAssertionByName( "Tax value more than 15 digits") )
+testStep.removeAssertion( testStep.getAssertionByName( "JsonPath Match") )
+testStep.removeAssertion( testStep.getAssertionByName( "status_msg") )
+testStep.removeAssertion( testStep.getAssertionByName( "err_sys") )
+testStep.removeAssertion( testStep.getAssertionByName( "err_grp") )
+testStep.removeAssertion( testStep.getAssertionByName( "dev_msg") )
+testStep.removeAsse
+
+

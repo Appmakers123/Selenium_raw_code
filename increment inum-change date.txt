@@ -1,0 +1,119 @@
+import com.eviware.soapui.impl.wsdl.teststeps.*
+import com.eviware.soapui.support.types.StringToStringMap
+import com.eviware.soapui.model.project.ProjectFactoryRegistry  
+import com.eviware.soapui.impl.wsdl.WsdlProjectFactory    
+import com.eviware.soapui.impl.wsdl.WsdlProject    
+
+def project = null     
+def workspace = testRunner.testCase.testSuite.project.getWorkspace();
+
+if (workspace != null) 
+{
+	 project = workspace.getProjectByName("GSTR1")
+	 //log.info(project)
+}
+
+def testSuite1 = project.getTestSuiteByName("GSTR1_Suite_SIT");
+
+if (project.open && project.name == "GSTR1") 
+{
+	 //log.info(testSuite1)
+	 if(testSuite1 == null)
+	 {    
+	  	throw new RuntimeException("Could not locate testsuite 'GSTR1_Suite_SIT'! ");
+	 }
+	 else 
+	 {
+	 	
+			 def inum = testRunner.testCase.testSuite.project.getPropertyValue("inum")
+			 def inumcounter = inum.toInteger() + 1
+			 testRunner.testCase.testSuite.project.setPropertyValue("inum", inumcounter.toString())
+
+			 def inum_cdnr = testRunner.testCase.testSuite.project.getPropertyValue("inum_cdnr")
+			 def inumcounter_cdnr = inum_cdnr.toInteger() + 1
+			 testRunner.testCase.testSuite.project.setPropertyValue("inum_cdnr", inumcounter_cdnr.toString())
+			 
+			/*
+			 def inum = com.eviware.soapui.SoapUI.globalProperties.getPropertyValue("inum")
+			 def inumcounter = inum.toInteger() + 1
+			 com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("inum",inumcounter.toString())
+			 log.info(com.eviware.soapui.SoapUI.globalProperties.getPropertyValue("inum"))
+			 */
+
+			 def fp = com.eviware.soapui.SoapUI.globalProperties.getPropertyValue("fp")
+			 //log.info(fp)
+			 def month = fp[0..1]
+			 def year = fp[2..5]
+			 //log.info("Month is " + month + " Year is " + year)
+			 def idate = "01-"+month+"-"+year
+			 //log.info(idate)
+			 com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("idate",idate.toString())
+
+			 def txamt = com.eviware.soapui.SoapUI.globalProperties.getPropertyValue("txamt")
+			 def rt = com.eviware.soapui.SoapUI.globalProperties.getPropertyValue("rt")
+			 def setIRT = com.eviware.soapui.SoapUI.globalProperties.getPropertyValue("setIRT")
+			 def setCRT = com.eviware.soapui.SoapUI.globalProperties.getPropertyValue("setCRT")
+
+			 def setValue = rt.toInteger()/100 * txamt.toInteger()
+			 def srt = rt.toInteger()/2
+			 def samt = setValue.toInteger()/2
+			 def crt = rt.toInteger()/2
+			 def camt = setValue.toInteger()/2
+			 def irt = rt.toInteger()
+			 def iamt = setValue.toInteger()
+				 
+			 if(rt==0)
+			 {
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("crt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("srt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("camt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("samt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("irt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("iamt","0")
+			 }
+
+			 else
+			 {
+			 if(setCRT=="Y"||setCRT=="y"&&setIRT=="N"||setIRT=="n")
+			 {
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("crt",crt.toString())
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("srt",srt.toString())
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("camt",camt.toString())
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("samt",samt.toString())
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("irt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("iamt","0")
+			 }
+			 else if(setCRT=="N"||setCRT=="n"&&setIRT=="Y"||setIRT=="y")
+			 {
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("crt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("srt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("camt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("samt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("irt",irt.toString())
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("iamt",iamt.toString())
+			 }else if(setCRT=="N"||setCRT=="n"&&setIRT=="N"||setIRT=="n")
+			 {
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("crt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("srt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("camt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("samt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("irt","0")
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("iamt","0")
+			 }else if(setCRT=="Y"||setCRT=="y"&&setIRT=="Y"||setIRT=="y")
+			 {
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("crt",crt.toString())
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("srt",srt.toString())
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("camt",camt.toString())
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("samt",samt.toString())
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("irt",irt.toString())
+			 	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("iamt",iamt.toString())
+			 }
+	 }
+
+	 }
+}
+
+else 
+{
+ 	throw new RuntimeException("Could not find project 'Project....' !")
+}

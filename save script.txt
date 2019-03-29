@@ -1,0 +1,51 @@
+import com.eviware.soapui.impl.wsdl.teststeps.*
+import com.eviware.soapui.support.types.StringToStringsMap
+import com.eviware.soapui.support.types.StringToStringMap
+
+/* URL Parameters*/
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('url', 'http://10.144.112.115:8080');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('gstin', '27AIYPV3847J1Z5');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('fp', '022019');
+
+/*Header Values*/
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('statecd', '27');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('username', 'isd.nt.rel2.mh');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('ret_period', '022019');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('source-device', 'Laptop');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('device-string', 'Android');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('txn', 'Manjusha696565656968888889');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('location', 'Mumbai');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('asp-clientsecretkey', 'b3c99a68-43e5-4198-9680-0405394b9f64');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('aspclient-id', 'USRML9IODPV5F9SAO22');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('ip-usr', '127.0.0.1');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('app-code', 'web');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('Content-Type', 'application/json');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('source-devicestring', 'Laptop');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('cache-control', 'no-cache');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('ip-usr1', '128');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('X-API-KEY', '');
+
+/*Session Management Parameters*/
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('otp', '575757');
+
+/*Request Variables*/
+
+/*com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('inum', '1');
+def inum1 = com.eviware.soapui.SoapUI.globalProperties.getPropertyValue('inum')*/
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('inum_b2b', "InvB2B"+'${#Project#inum}');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('inum_b2cl', "InvB2CL"+'${#Project#inum}');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('ntnum_cdnr', "NtNmCDNR"+'${#Project#inum}');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('inum_exp', "InvEXP"+'${#Project#inum}');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('ntnum_cdnra', "NtNmCDNRA"+'${#Project#inum}');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('inum_cdnr', "InvB2B"+'${#Project#inum_cdnr}');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('inum_b2ba', "InvB2BA"+'${#Project#inum}');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('inum_b2cla', "InvB2CLA"+'${#Project#inum}');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('inum_expa', "InvEXPA"+'${#Project#inum}');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('inum_cdnra', "InvCDNRA"+'${#Project#inum}');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('ctin', '33AIYPV3847J1ZC');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('etin', '');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('txamt', '250000');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('rt', '18');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('setCRT', 'N');
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue('setIRT', 'Y');
+

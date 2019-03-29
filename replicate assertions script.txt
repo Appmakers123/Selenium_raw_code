@@ -1,0 +1,22 @@
+import com.eviware.soapui.model.testsuite.Assertable
+def project = context.testCase.testSuite.project
+def testSuite = project.getTestSuiteByName("GSTR3B Test Suite")
+def testCase = testSuite.getTestCaseByName("GSTR3B Negative cases")
+//log.info("Test case" +testCase)
+
+def testStepSrc = testCase.getTestStepByName("Outward taxable supplies-txval")
+def size
+size = testRunner.testCase.testSuite.project.testSuites["GSTR3B Test Suite"].testCases["GSTR3B Negative cases"].getTestStepCount();
+//log.info("Size " +size)
+for(int i=2;i<size;i++)
+{
+def testStepTrgt = testCase.getTestStepAt(i)
+//def testStepTrgt =testCase.getTestStepByName("Outward taxable supplies-camt")
+def counter = testStepSrc.getAssertionList().size()
+//log.info("Counter "+counter)
+for (count in 1..<counter)
+{
+    testStepTrgt.cloneAssertion(testStepSrc.getAssertionAt(count), testStepSrc.getAssertionAt(count).getName())
+
+}
+}

@@ -1,0 +1,86 @@
+import com.eviware.soapui.impl.wsdl.teststeps.*
+import com.eviware.soapui.support.types.StringToStringMap
+import com.eviware.soapui.model.project.ProjectFactoryRegistry  
+import com.eviware.soapui.impl.wsdl.WsdlProjectFactory    
+import com.eviware.soapui.impl.wsdl.WsdlProject    
+
+//get the Util project 
+def project = null     
+def workspace = testRunner.testCase.testSuite.project.getWorkspace();
+
+if (workspace != null) {
+ project = workspace.getProjectByName("GSTR1")
+ log.info(project)
+}
+
+if (project.open && project.name == "GSTR1") {
+ //def properties = new com.eviware.soapui.support.types.StringToObjectMap()    
+ def testSuite1 = project.getTestSuiteByName("GSTR1_Suite_SIT");
+ log.info(testSuite1)
+ if(testSuite1 == null)
+ {    
+  	throw new RuntimeException("Could not locate testsuite 'GSTR1_Suite_SIT'! ");
+ }
+ else {
+//def project = context.testCase.testSuite.project
+def token = "\${"+"#"+"Global"+"#"+"token}"
+log.info(token)
+def gstin = "\${"+"#"+"Global"+"#"+"gstin}"
+log.info(gstin)
+
+def retperiod = "\${"+"#"+"Global"+"#"+"ret_period}"
+def statecd = "\${"+"#"+"Global"+"#"+"statecd}"
+def username = "\${"+"#"+"Global"+"#"+"username}"
+def Contenttype = "\${"+"#"+"Global"+"#"+"Content-type}"
+def location = "\${"+"#"+"Global"+"#"+"location}"
+def aspclientsecretkey = "\${"+"#"+"Global"+"#"+"asp-clientsecretkey}"
+def aspclientid = "\${"+"#"+"Global"+"#"+"aspclient-id}"
+def ipusr = "\${"+"#"+"Global"+"#"+"ip-usr}"
+def appcode = "\${"+"#"+"Global"+"#"+"app-code}"
+def XAPIKEY = "\${"+"#"+"Global"+"#"+"X-API-KEY}"
+def devicestring = "\${"+"#"+"Global"+"#"+"device-string}"
+def sourcedevice = "\${"+"#"+"Global"+"#"+"source-device}"
+def txn = "\${"+"#"+"Global"+"#"+"txn}"
+def sourcedevicestring = "\${"+"#"+"Global"+"#"+"source-devicestring}"
+def appkey = "\${"+"#"+"Global"+"#"+"appkey}"
+def authtoken = "\${"+"#"+"Global"+"#"+"auth-token}"
+def sek = "\${"+"#"+"Global"+"#"+"sek}"
+
+//def valueOf = { key -> testSuite.getPropertyValue( txn ) }
+//log.info(txn)
+//project.testSuiteList.each{ testSuite ->
+testSuite1.testCaseList.each { testCase ->
+   testCase.testStepList.each { testStep ->
+      if( testStep instanceof WsdlTestRequestStep || testStep instanceof RestTestRequestStep  ) 
+      {
+      	def headers = new StringToStringMap()
+		headers.put("gstin",gstin)
+		headers.put("state-cd",statecd)
+		headers.put("username",username)
+		headers.put("Content-type",Contenttype)
+		headers.put("location",location)
+		headers.put("asp-clientsecretkey",aspclientsecretkey)
+		headers.put("aspclient-id",aspclientid)
+		headers.put("ip-usr",ipusr)
+		headers.put("app-code",appcode)
+		headers.put("X-API-KEY",XAPIKEY)
+		headers.put("device-string",devicestring)
+		headers.put("source-device",sourcedevice)
+		headers.put("txn",txn)
+		headers.put("source-devicestring",sourcedevicestring)
+		headers.put("appkey",appkey)
+		headers.put("auth-token",authtoken)
+		headers.put("sek",sek)
+		headers.put("ret_period",retperiod)
+         log.info("Setting headers ${headers} in test case ${testCase.label}")
+         testStep.testRequest.setRequestHeaders(headers)
+   }
+}
+}
+}
+}
+else {
+
+ throw new RuntimeException("Could not find project ' Project....' !")
+
+}

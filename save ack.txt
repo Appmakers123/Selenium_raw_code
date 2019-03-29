@@ -1,0 +1,22 @@
+import net.sf.*
+import net.sf.json.*
+import net.sf.json.groovy.*
+
+/**
+* This is script assertion
+* retrieves specified values from currest step response
+* and stores at global level
+**/
+
+assert context.response, "Response is empty or null"
+
+def parsedData = new JsonSlurper().parseText(context.response)
+log.info(parsedData)
+
+def ackNo = parsedData.ackNo
+log.info "AckNo from response: ${ackNo}"
+assert ackNo, "AckNo is empty or not present"
+//context.testCase.testSuite.project.setPropertyValue('dummy1', ackNo)
+//com.eviware.soapui.model.propertyexpansion.PropertyExpansionUtils.globalProperties.setPropertyValue('dummy1', 'ackNo')
+
+com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("ackNob2cl",ackNo)
